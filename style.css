@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'bauhaus-bold-regular'; /*a name to be used later*/
+    src: url('https://www.wfonts.com/download/data/2016/05/19/bauhaus-bold/bauhaub.ttf'); /*URL to font*/
+}
+
+* {
+    font-family: 'bauhaus-bold-regular', sans-serif;
+}
