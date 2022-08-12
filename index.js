@@ -5,8 +5,21 @@ form.addEventListener('submit', (event) => {
     const fname = form.elements[0].value
     form.hidden = true
     if(fname === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") {
-        document.getElementById('access-granted').hidden = false
         document.getElementById('Standard').hidden = true
+        document.getElementById('authorizing...').hidden = false
+        delay(3000).then(() => {
+            document.getElementById('authorizing...').hidden = true
+            document.getElementById('at').hidden = false
+            document.getElementById('at1').hidden = false
+            document.getElementById('at2').hidden = false
+
+            delay(6000).then(() => {
+                document.getElementById('at').hidden = true
+                document.getElementById('at1').hidden = true
+                document.getElementById('at2').hidden = true
+                document.getElementById('access-granted').hidden = false
+            })
+        })
     } else {
         document.getElementById('access-denied').hidden = false
         document.getElementById('Standard').hidden = true
@@ -33,4 +46,8 @@ function onYouTubeIframeAPIReady() {
         videoId: 'dQw4w9WgXcQ',
 
     });
+}
+
+function delay(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
 }

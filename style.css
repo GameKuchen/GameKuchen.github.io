@@ -10,6 +10,9 @@
 #player {
     visibility: hidden;
 }
+#Authorized {
+    text-align: center;
+}
 
 #dabod{
     position: center;
