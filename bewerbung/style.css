@@ -6,15 +6,6 @@
 * {
     font-family: 'bauhaus-bold-regular', sans-serif;
 }
-#textostoron{
-    text-align: left;
-}
-#access-denied, #Standard, #auths{
-    text-align: center;
-}
-#player {
-    visibility: hidden;
-}
 
 #dabod{
     position: center;

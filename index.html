@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,17 +9,71 @@
 </head>
 <body>
 <script src="index.js" defer="defer"></script>
-<form id="formi">
-    <label for="fname">Enter Auth Code:</label><br>
-    <input type="text" id="fname" name="fname"><br>
-    <input type="submit" value="Submit">
-</form>
+<div id="dabod">
+    <div id="Standard">
+        <h1>Autorisierung Erforderlich</h1>
+        <h2>Memetische Kampfstoffe bereitgestellt</h2>
+    </div>
 
-<article id="access-granted">
-    <h2></h2>
-</article>
-<article id="access-denied">
-    <h2>ACBb</h2>
-</article>
+    <div id="auths">
+        <form id="formi">
+            <label for="fname">Authentifizierungs Code eingeben</label><br>
+            <input type="text" id="fname" name="fname"><br>
+            <input type="submit" value="Autorisieren">
+        </form>
+        <article id="access-granted" hidden>
+            <h1>Personal Datei von Finn Grimes</h1>
+            <h2>Sicherheitsfreigabe Level 4</h2>
+            <div id="textostoron">
+                <p>Name: Finn Grimes <br>
+                Geschlecht: Männlich
+                Geburtsdatum: 20.01.1995 <br> <br>
+                Sicherheitsfreigabe: 4 <br>
+                Personalklasse: E <br>
+                Standort: UKR-Site 190 <br>
+
+                <p style="font-weight: bold">
+                    Tätigkeiten in der Foundation
+                </p>
+                Finn Grimes tätigkeiten als Major in der NU-7 beziehen sich derzeit größten teils darauf die Foundation, im Falle eines Einbruchs,
+                mit seinem PioneerTool™ abzusichern. Ausserdem ist er derzeit dabei neues Personal in die NU-7 zu holen. Des Weiteren
+                läuft er meist patrouillen in der HCZ. <br>Er kümmert sich auch um das Putzpersonal der Foundation,
+                das hat er sich zu seiner eigenen Aufgabe gemacht dies ist auch mit ███████ abgesprochen.
+
+                <p style="font-weight: bold">
+                    Personalität
+                </p>
+                Finn Grimes ist eine sehr Friedliche und humane Person kann aber auch streng sein.
+                Er ist ausserdem mit [E-02]The Actor befreundet, das bedeutet er handelt meist ethisch korrekt.
+                Finn Grimes distanziert sich gerne von schwierigen situationen, um sich einen überblick zu verschaffen und
+                einen klaren Kopf zu bekommen.
+
+                <p style="font-weight: bold">
+                    Lebenslauf
+                </p>
+                Finn Grimes ist in Deutschland in Sachsen aufgewachsen.
+                Als er 18 wurde, beschloss er zum Militär zu gehen und er wurde in der Ukraine stationiert. Dort hatte er es bis zum Major / OF-3 geschafft.
+                Als er das 22 Lebensjahr erreicht hatte, kamen leute von der UKR-Site-190 auf ihn zu um in zu Rekrutieren. Er lehnte das angebot nicht ab.
+                Als er in die Foundation kam, hatte er sich direkt für die NU-7 interessiert und wurde von ███████ rekrutiert.
+                Aufgrund seiner guten leistungen wurde er mit 26 zum Major befördert.
+
+                <p style="font-weight: bold">
+                    Extras
+                </p>
+
+                Finn Grimes hat eine ausstehende bewerbung.<br>
+                <a href="bewerbung/index.html">Bewerbung als NU-7 Colonel.</a>
+
+            </div>
+        </article>
+        <article id="access-denied" hidden>
+            <h2 id="acd_h2">Zugriff Verweigert</h2>
+            <h3 id="acd_h3">Memetische Kampfstoffe Freigesetzt</h3>
+            <div id="player"></div>
+        </article>
+    </div>
+</div>
+
+
 </body>
 </html>
