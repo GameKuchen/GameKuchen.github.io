@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'bauhaus-bold-regular'; /*a name to be used later*/
-    src: local("bauhaus-bold-bt.ttf") /*URL to font*/
-}
-
 * {
     font-family: 'bauhaus-bold-regular', sans-serif;
 }
