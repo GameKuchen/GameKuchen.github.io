@@ -7,13 +7,13 @@ form.addEventListener('submit', (event) => {
     if(fname === "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855") {
         document.getElementById('Standard').hidden = true
         document.getElementById('authorizing...').hidden = false
-        delay(3000).then(() => {
+        delay(2000).then(() => {
             document.getElementById('authorizing...').hidden = true
             document.getElementById('at').hidden = false
             document.getElementById('at1').hidden = false
             document.getElementById('at2').hidden = false
 
-            delay(6000).then(() => {
+            delay(3000).then(() => {
                 document.getElementById('at').hidden = true
                 document.getElementById('at1').hidden = true
                 document.getElementById('at2').hidden = true
