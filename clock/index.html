@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transit Simulation Clock</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --panel-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --text-muted: #aaaaaa;
+            --accent-color: #e63946;
+            --clock-face: #ffffff;
+            --clock-mark: #1a1a1a;
+            --hand-hour: #1a1a1a;
+            --hand-minute: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background-color: var(--panel-bg);
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        input:focus, select:focus {
+            outline: 1px solid var(--accent-color);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background-color: #2a9d8f;
+            color: white;
+        }
+        .btn-primary:hover { background-color: #218074; }
+        
+        .btn-primary.paused {
+            background-color: var(--accent-color);
+        }
+        .btn-primary.paused:hover { background-color: #c82e3a; }
+
+        .btn-secondary {
+            background-color: #495057;
+            color: white;
+        }
+        .btn-secondary:hover { background-color: #343a40; }
+
+        /* Clock Rendering */
+        .clock-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: var(--clock-face);
+            border-radius: 50%;
+            border: 14px solid #333;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .clock-face {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        /* Sharp station ticks */
+        .tick {
+            position: absolute;
+            width: 6px;
+            height: 18px;
+            background-color: var(--clock-mark);
+            left: calc(50% - 3px);
+            top: 4px;
+            transform-origin: 3px 136px;
+        }
+
+        .tick:nth-child(5n) {
+            height: 30px;
+            width: 8px;
+            left: calc(50% - 4px);
+            transform-origin: 4px 136px;
+        }
+
+        /* Hands */
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .hour-hand {
+            width: 10px;
+            height: 23%;
+            background-color: var(--hand-hour);
+            margin-left: -5px;
+        }
+
+        .minute-hand {
+            width: 7px;
+            height: 37%;
+            background-color: var(--hand-minute);
+            margin-left: -3.5px;
+        }
+
+        .second-hand {
+            width: 3px;
+            height: 42%;
+            background-color: var(--accent-color);
+            margin-left: -1.5px;
+            border-radius: 0;
+        }
+
+        /* Railway style center pin */
+        .center-pin {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .digital-display {
+            margin-top: 25px;
+            font-size: 32px;
+            font-family: monospace;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            background: #000;
+            padding: 8px 20px;
+            border-radius: 6px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Controls Layout -->
+    <div class="control-panel">
+        <div class="input-row">
+            <div class="input-group">
+                <label>Hour (24h)</label>
+                <input type="number" id="input-hour" min="0" max="23" value="08">
+            </div>
+            <div class="input-group">
+                <label>Minute</label>
+                <input type="number" id="input-minute" min="0" max="59" value="00">
+            </div>
+            <div class="input-group">
+                <label>Second</label>
+                <input type="number" id="input-second" min="0" max="59" value="00">
+            </div>
+            <div class="input-group">
+                <label>Speed</label>
+                <select id="input-multiplier">
+                    <option value="1">1x (Real)</option>
+                    <option value="2">2x</option>
+                    <option value="5">5x</option>
+                    <option value="10">10x</option>
+                    <option value="30">30x</option>
+                    <option value="60">60x (1m/s)</option>
+                </select>
+            </div>
+        </div>
+        <div class="btn-row">
+            <button id="btn-toggle" class="btn-primary">Start Simulation</button>
+            <button id="btn-sync" class="btn-secondary">Set Time</button>
+        </div>
+    </div>
+
+    <!-- Station Clock Frame -->
+    <div class="clock-box">
+        <div class="clock-face" id="clock-ticks">
+            <div class="hand hour-hand" id="hour-hand"></div>
+            <div class="hand minute-hand" id="minute-hand"></div>
+            <div class="hand second-hand" id="second-hand"></div>
+            <div class="center-pin"></div>
+        </div>
+    </div>
+
+    <div class="digital-display" id="digital-out">08:00:00</div>
+</div>
+
+<script>
+    // Configuration & State
+    let simTime = new Date();
+    simTime.setHours(8, 0, 0, 0); // Default simulation starting target
+
+    let isRunning = false;
+    let multiplier = 1;
+    let lastRealTime = performance.now();
+
+    // DOM Cache
+    const hourHand = document.getElementById('hour-hand');
+    const minuteHand = document.getElementById('minute-hand');
+    const secondHand = document.getElementById('second-hand');
+    const digitalOut = document.getElementById('digital-out');
+    
+    const inHour = document.getElementById('input-hour');
+    const inMin = document.getElementById('input-minute');
+    const inSec = document.getElementById('input-second');
+    const inMult = document.getElementById('input-multiplier');
+    
+    const btnToggle = document.getElementById('btn-toggle');
+    const btnSync = document.getElementById('btn-sync');
+    const ticksContainer = document.getElementById('clock-ticks');
+
+    // Render Swiss-Style Dial Ticks dynamically
+    for (let i = 0; i < 60; i++) {
+        const tick = document.createElement('div');
+        tick.className = 'tick';
+        tick.style.transform = `rotate(${i * 6}deg)`;
+        ticksContainer.appendChild(tick);
+    }
+
+    // Process Frame Changes
+    function updateClockMechanics() {
+        const hours = simTime.getHours();
+        const minutes = simTime.getMinutes();
+        const seconds = simTime.getSeconds();
+        const ms = simTime.getMilliseconds();
+
+        // High-fidelity smooth sweeping math
+        const secondsDeg = (seconds * 6) + (ms * 0.006);
+        const minutesDeg = (minutes * 6) + (seconds * 0.1);
+        const hoursDeg = ((hours % 12) * 30) + (minutes * 0.5);
+
+        hourHand.style.transform = `rotate(${hoursDeg}deg)`;
+        minuteHand.style.transform = `rotate(${minutesDeg}deg)`;
+        secondHand.style.transform = `rotate(${secondsDeg}deg)`;
+
+        // Clean padding for Digital Display
+        const pHour = String(hours).padStart(2, '0');
+        const pMin = String(minutes).padStart(2, '0');
+        const pSec = String(seconds).padStart(2, '0');
+        digitalOut.textContent = `${pHour}:${pMin}:${pSec}`;
+    }
+
+    // Engine loop using high-precision hardware timestamps
+    function loop(now) {
+        if (isRunning) {
+            const deltaRealMs = now - lastRealTime;
+            const deltaSimMs = deltaRealMs * multiplier;
+            simTime.setTime(simTime.getTime() + deltaSimMs);
+        }
+        lastRealTime = now;
+        updateClockMechanics();
+        requestAnimationFrame(loop);
+    }
+
+    // UI Interactive Event Handling
+    function applyInputsToSimulation() {
+        let h = parseInt(inHour.value) || 0;
+        let m = parseInt(inMin.value) || 0;
+        let s = parseInt(inSec.value) || 0;
+
+        // Force operational bounding rules
+        h = Math.max(0, Math.min(23, h));
+        m = Math.max(0, Math.min(59, m));
+        s = Math.max(0, Math.min(59, s));
+
+        inHour.value = String(h).padStart(2, '0');
+        inMin.value = String(m).padStart(2, '0');
+        inSec.value = String(s).padStart(2, '0');
+
+        simTime.setHours(h, m, s, 0);
+        updateClockMechanics();
+    }
+
+    btnSync.addEventListener('click', () => {
+        applyInputsToSimulation();
+    });
+
+    btnToggle.addEventListener('click', () => {
+        isRunning = !isRunning;
+        if (isRunning) {
+            btnToggle.textContent = "Pause Simulation";
+            btnToggle.classList.add('paused');
+            // Re-anchor reference point to prevent time skipping forward while paused
+            lastRealTime = performance.now();
+        } else {
+            btnToggle.textContent = "Start Simulation";
+            btnToggle.classList.remove('paused');
+        }
+    });
+
+    inMult.addEventListener('change', (e) => {
+        multiplier = parseFloat(e.target.value);
+    });
+
+    // Fire initialization
+    applyInputsToSimulation();
+    requestAnimationFrame(loop);
+</script>
+</body>
+</html>
