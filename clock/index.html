@@ -33,15 +33,41 @@
             justify-content: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Top Corner Toggle Button */
+        .mode-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--panel-bg);
+            border: 1px solid #444;
+            color: var(--text-muted);
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle-btn:hover {
+            color: #fff;
+            border-color: var(--accent-color);
         }
 
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 500px;
             width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease;
         }
 
         /* Control Panel */
@@ -52,6 +78,24 @@
             width: 100%;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 250px;
+            opacity: 1;
+            overflow: hidden;
+        }
+
+        /* Trainee Mode Hiding Mechanics */
+        body.trainee-mode .control-panel {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.trainee-mode .digital-display {
+            display: none !important;
         }
 
         .input-row {
@@ -82,6 +126,7 @@
             border-radius: 4px;
             font-size: 16px;
             text-align: center;
+            width: 100%;
         }
 
         input:focus, select:focus {
@@ -93,7 +138,7 @@
             gap: 10px;
         }
 
-        button {
+        button.action-btn {
             flex: 1;
             padding: 12px;
             border: none;
@@ -105,32 +150,26 @@
             transition: background 0.2s;
         }
 
-        .btn-primary {
-            background-color: #2a9d8f;
-            color: white;
-        }
+        .btn-primary { background-color: #2a9d8f; color: white; }
         .btn-primary:hover { background-color: #218074; }
-        
-        .btn-primary.paused {
-            background-color: var(--accent-color);
-        }
+        .btn-primary.paused { background-color: var(--accent-color); }
         .btn-primary.paused:hover { background-color: #c82e3a; }
-
-        .btn-secondary {
-            background-color: #495057;
-            color: white;
-        }
+        .btn-secondary { background-color: #495057; color: white; }
         .btn-secondary:hover { background-color: #343a40; }
 
-        /* Clock Rendering */
+        /* --- DYNAMIC CLOCK STYLES --- */
         .clock-box {
             position: relative;
             width: 100%;
+            max-width: 450px; /* Keeps it from blowing up on huge screens */
             aspect-ratio: 1 / 1;
             background: var(--clock-face);
             border-radius: 50%;
-            border: 14px solid #333;
+            /* Border scales down slightly on smaller screens */
+            border: min(3vw, 14px) solid #333; 
             box-shadow: inset 0 0 20px rgba(0,0,0,0.2), 0 10px 30px rgba(0,0,0,0.5);
+            margin: 0 auto;
+            flex-shrink: 0;
         }
 
         .clock-face {
@@ -139,60 +178,72 @@
             position: relative;
         }
 
-        /* Sharp station ticks */
+        /* Fluid Ticks using wrappers */
+        .tick-wrapper {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
         .tick {
             position: absolute;
-            width: 6px;
-            height: 18px;
             background-color: var(--clock-mark);
-            left: calc(50% - 3px);
-            top: 4px;
-            transform-origin: 3px 136px;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 1.5%; /* Margin from the outer edge */
+            border-radius: 1px;
         }
 
-        .tick:nth-child(5n) {
-            height: 30px;
-            width: 8px;
-            left: calc(50% - 4px);
-            transform-origin: 4px 136px;
+        .tick.minor {
+            width: 1.2%;
+            height: 5%;
         }
 
-        /* Hands */
+        .tick.major {
+            width: 2.5%;
+            height: 9%;
+        }
+
+        /* Fluid Hands */
         .hand {
             position: absolute;
             bottom: 50%;
             left: 50%;
             transform-origin: bottom center;
             border-radius: 4px 4px 0 0;
+            z-index: 5;
         }
 
         .hour-hand {
-            width: 10px;
-            height: 23%;
+            width: 3%;
+            height: 25%;
             background-color: var(--hand-hour);
-            margin-left: -5px;
+            margin-left: -1.5%;
         }
 
         .minute-hand {
-            width: 7px;
-            height: 37%;
+            width: 2%;
+            height: 38%;
             background-color: var(--hand-minute);
-            margin-left: -3.5px;
+            margin-left: -1%;
         }
 
         .second-hand {
-            width: 3px;
-            height: 42%;
+            width: 1%;
+            height: 45%;
             background-color: var(--accent-color);
-            margin-left: -1.5px;
+            margin-left: -0.5%;
             border-radius: 0;
+            z-index: 6;
         }
 
-        /* Railway style center pin */
+        /* Fluid Center Pin */
         .center-pin {
             position: absolute;
-            width: 16px;
-            height: 16px;
+            width: 4%;
+            height: 4%;
             background-color: var(--accent-color);
             border-radius: 50%;
             left: 50%;
@@ -203,7 +254,7 @@
 
         .digital-display {
             margin-top: 25px;
-            font-size: 32px;
+            font-size: clamp(24px, 5vw, 32px); /* Scales with screen */
             font-family: monospace;
             font-weight: bold;
             letter-spacing: 2px;
@@ -212,10 +263,20 @@
             padding: 8px 20px;
             border-radius: 6px;
             border: 1px solid #333;
+            display: block;
         }
     </style>
 </head>
 <body>
+
+<!-- Mode Toggle -->
+<button class="mode-toggle-btn" id="btn-mode-toggle">
+    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" id="toggle-icon">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+        <path d="M0 8s3-5.5 8-5.5s8 5.5 8 5.5s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 a3.5 3.5 0 0 0 0 7z"/>
+    </svg>
+    <span id="toggle-text">Trainee Mode (Hide Setup)</span>
+</button>
 
 <div class="container">
     <!-- Controls Layout -->
@@ -246,12 +307,12 @@
             </div>
         </div>
         <div class="btn-row">
-            <button id="btn-toggle" class="btn-primary">Start Simulation</button>
-            <button id="btn-sync" class="btn-secondary">Set Time</button>
+            <button id="btn-toggle" class="action-btn btn-primary">Start Simulation</button>
+            <button id="btn-sync" class="action-btn btn-secondary">Set Time</button>
         </div>
     </div>
 
-    <!-- Station Clock Frame -->
+    <!-- Dynamic Station Clock Frame -->
     <div class="clock-box">
         <div class="clock-face" id="clock-ticks">
             <div class="hand hour-hand" id="hour-hand"></div>
@@ -267,7 +328,7 @@
 <script>
     // Configuration & State
     let simTime = new Date();
-    simTime.setHours(8, 0, 0, 0); // Default simulation starting target
+    simTime.setHours(8, 0, 0, 0); 
 
     let isRunning = false;
     let multiplier = 1;
@@ -287,13 +348,22 @@
     const btnToggle = document.getElementById('btn-toggle');
     const btnSync = document.getElementById('btn-sync');
     const ticksContainer = document.getElementById('clock-ticks');
+    
+    const btnModeToggle = document.getElementById('btn-mode-toggle');
+    const toggleText = document.getElementById('toggle-text');
+    const toggleIcon = document.getElementById('toggle-icon');
 
-    // Render Swiss-Style Dial Ticks dynamically
+    // Render Dynamic Swiss-Style Dial Ticks using invisible rotation wrappers
     for (let i = 0; i < 60; i++) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'tick-wrapper';
+        wrapper.style.transform = `rotate(${i * 6}deg)`;
+
         const tick = document.createElement('div');
-        tick.className = 'tick';
-        tick.style.transform = `rotate(${i * 6}deg)`;
-        ticksContainer.appendChild(tick);
+        tick.className = (i % 5 === 0) ? 'tick major' : 'tick minor';
+        
+        wrapper.appendChild(tick);
+        ticksContainer.appendChild(wrapper);
     }
 
     // Process Frame Changes
@@ -303,7 +373,6 @@
         const seconds = simTime.getSeconds();
         const ms = simTime.getMilliseconds();
 
-        // High-fidelity smooth sweeping math
         const secondsDeg = (seconds * 6) + (ms * 0.006);
         const minutesDeg = (minutes * 6) + (seconds * 0.1);
         const hoursDeg = ((hours % 12) * 30) + (minutes * 0.5);
@@ -312,14 +381,13 @@
         minuteHand.style.transform = `rotate(${minutesDeg}deg)`;
         secondHand.style.transform = `rotate(${secondsDeg}deg)`;
 
-        // Clean padding for Digital Display
         const pHour = String(hours).padStart(2, '0');
         const pMin = String(minutes).padStart(2, '0');
         const pSec = String(seconds).padStart(2, '0');
         digitalOut.textContent = `${pHour}:${pMin}:${pSec}`;
     }
 
-    // Engine loop using high-precision hardware timestamps
+    // Engine loop
     function loop(now) {
         if (isRunning) {
             const deltaRealMs = now - lastRealTime;
@@ -337,7 +405,6 @@
         let m = parseInt(inMin.value) || 0;
         let s = parseInt(inSec.value) || 0;
 
-        // Force operational bounding rules
         h = Math.max(0, Math.min(23, h));
         m = Math.max(0, Math.min(59, m));
         s = Math.max(0, Math.min(59, s));
@@ -350,6 +417,21 @@
         updateClockMechanics();
     }
 
+    // Toggle panel visibility
+    btnModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('trainee-mode');
+        
+        if (document.body.classList.contains('trainee-mode')) {
+            toggleText.textContent = "Instructor Mode (Show Setup)";
+            toggleIcon.innerHTML = `<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709zM11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.248a2.5 2.5 0 0 1-2.83-2.829l-1.047-1.047a3.5 3.5 0 0 0 3.877 3.877l.001-.001zm.23 2.072c1.24-.056 2.392-.494 3.354-1.151l.708.708A9.205 9.205 0 0 1 8 13.5c-5 0-8-5.5-8-5.5a9.42 9.42 0 0 1 1.272-2.034l.708.708c-.26.34-.51.708-.73 1.077.219.289.478.583.774.882C2.12 10.332 3.88 11.5 8 11.5a6.855 6.855 0 0 0 1.583-.184l-.766-.767zm-1.046-1.046a4.517 4.517 0 0 1-.522-.11l-1.686-1.686c.069-.203.14-.403.218-.598l5.211 5.211a6.88 6.88 0 0 1-1.394.227z"/>
+                                    <path d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.83z"/>`;
+        } else {
+            toggleText.textContent = "Trainee Mode (Hide Setup)";
+            toggleIcon.innerHTML = `<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                    <path d="M0 8s3-5.5 8-5.5s8 5.5 8 5.5s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 a3.5 3.5 0 0 0 0 7z"/>`;
+        }
+    });
+
     btnSync.addEventListener('click', () => {
         applyInputsToSimulation();
     });
@@ -359,7 +441,6 @@
         if (isRunning) {
             btnToggle.textContent = "Pause Simulation";
             btnToggle.classList.add('paused');
-            // Re-anchor reference point to prevent time skipping forward while paused
             lastRealTime = performance.now();
         } else {
             btnToggle.textContent = "Start Simulation";
