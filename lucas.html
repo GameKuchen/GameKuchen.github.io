@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SCP Foundation - Dossier: Sgt. Waldenstein</title>
+    <link rel="stylesheet" href="lucas.css" />
+  </head>
+  <body>
+    <!-- SCIPNET INITIAL BOOT OVERLAY -->
+    <div id="scipnet-boot-overlay">
+      <div class="boot-terminal-box">
+        <div class="boot-branding">⚡ SCIPNET TERMINAL ACCESS v6.50 ⚡</div>
+        <div class="boot-logs" id="bootLogs">
+          SCIPNET OS v6.50 loaded successfully.<br />Waiting for authorization
+          token...
+        </div>
+        <div class="boot-action-area">
+          <button class="boot-btn" id="bootBtn" onclick="runScipnetBoot()">
+            INITIALIZE SECURE LOGON [CLEARANCE LEVEL 4]
+          </button>
+          <div style="color: #ef4444; font-size: 0.75rem; text-align: center">
+            WARNING: ANONYMOUS SESSIONS ARE ROUTED DIRECTLY THROUGH
+            ADMINISTRATIVE SIGHT OVERWATCH RECORDERS.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP CONTROL TERMINAL INTERFACE -->
+    <header class="terminal-header">
+      <div class="header-title">
+        <p>SECURITY NETWORK LOGON // SCIPNET-65</p>
+        <h1>PERSONNEL DOSSIER: SGT. WALDENSTEIN</h1>
+      </div>
+      <div class="header-status">
+        <span class="pulse-node"></span> SECURE CONNECTION ESTABLISHED
+      </div>
+    </header>
+
+    <div class="grid-layout">
+      <!-- SIDEBAR METADATA PANELS -->
+      <aside class="sidebar">
+        <div class="profile-card">
+          <div class="avatar-container">
+            <span
+              style="
+                font-family: var(--font-terminal);
+                color: var(--text-muted);
+              "
+              >[ IMAGE FILE ENGAGED ]</span
+            >
+          </div>
+
+          <div class="clearance-indicator">SECURITY LEVEL: 2 / CURRENT</div>
+
+          <div class="meta-list">
+            <div class="meta-item">
+              <span class="meta-label">Designation</span
+              ><span class="meta-value">Sgt. Lucas Waldenstein</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Branch</span
+              ><span class="meta-value">General Security Dep. (GSD)</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Current Post</span
+              ><span class="meta-value">Site-65</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Personnel Class</span
+              ><span class="meta-value">Class C</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Origin Country</span
+              ><span class="meta-value">Germany (Saxony)</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Birth Date</span
+              ><span class="meta-value">20.01.1995</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Status</span
+              ><span class="meta-value" style="color: #10b981"
+                >ACTIVE DUTY</span
+              >
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN DATA MAIN-STREAM -->
+      <main class="main-stream">
+        <!-- SECTION I: CURRENT BIOGRAPHY / PROFILE -->
+        <section class="data-panel">
+          <div class="panel-nav">
+            <h2>I. Operational Background & Profile</h2>
+          </div>
+          <div class="panel-body">
+            <p>
+              Sergeant Lucas Waldenstein is a highly disciplined and tactically
+              proficient NCO currently serving within the General Security
+              Division at Site-65. Waldenstein possesses extensive operational
+              experience handling personnel management under extreme pressure,
+              showing high marks in situational control and defensive site
+              security maneuvers.
+            </p>
+            <br />
+            <p>
+              Unlike standard administrative enforcers, Sergeant Waldenstein
+              operates under a foundational philosophy that explicit
+              communication, mutual accountability, and high collective
+              standards are the core tenets of security infrastructure. He is
+              widely recognized among peers for prioritizing active team
+              synergy, mentoring junior officers, and refusing to simply "issue
+              commands" without providing tactical context.
+            </p>
+          </div>
+        </section>
+
+        <!-- SECTION II: LEBENSLAUF / SERVICE HISTORY -->
+        <section class="data-panel">
+          <div class="panel-nav">
+            <h2>II. Lebenslauf (Service History Record)</h2>
+          </div>
+          <div class="panel-body">
+            <div class="timeline-container">
+              <div class="timeline-node">
+                <div class="timeline-stamp">2013 — 2017</div>
+                <div class="timeline-header">
+                  Military Service // Armed Forces
+                </div>
+                <div class="timeline-desc">
+                  Enlisted at age 18 following secondary education in Saxony,
+                  Germany. Rapidly advanced due to operational discipline and
+                  tactical awareness. Assigned overseas commands with leadership
+                  oversight of active personnel squads.
+                </div>
+              </div>
+
+              <div class="timeline-node">
+                <div class="timeline-stamp">2017 — 2023</div>
+                <div class="timeline-header">
+                  Foundation Procurement // MTF Nu-7 ("Hammer Down")
+                </div>
+                <div class="timeline-desc">
+                  Recruited out of traditional military command chains by
+                  Foundation procurement scouts. Transferred to MTF Nu-7
+                  regional containment detachment. Spent multiple years
+                  executing high-threat kinetic operations, regional
+                  stabilization tasks, and personnel training programs. Retained
+                  high-tier leadership marks.
+                </div>
+              </div>
+
+              <div class="timeline-node">
+                <div class="timeline-stamp">2023 — 2025</div>
+                <div class="timeline-header">
+                  Administrative Restructuring // Re-assignment
+                </div>
+                <div class="timeline-desc">
+                  Transferred away from active field units due to wide-scale
+                  institutional shifts. Reallocated to regional site commands
+                  under a protected operational profile update.
+                </div>
+              </div>
+
+              <div class="timeline-node">
+                <div class="timeline-stamp">2025 — Present</div>
+                <div class="timeline-header">Site-65 GSD Operations</div>
+                <div class="timeline-desc">
+                  Integrated into Site-65's defensive layout. Successfully
+                  worked through the standard divisional progression tracking
+                  from Security Cadet up to Security Sergeant. Currently handles
+                  baseline security, asset defense pipelines, and active
+                  security response maneuvers.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION III: RESTRICTED MEDICAL & PRIOR FILE ARCHIVE -->
+        <section class="data-panel secure-lock">
+          <div class="panel-nav">
+            <h2>
+              III. Classified Medical & Archival Files (Level 4 Override
+              Required)
+            </h2>
+          </div>
+
+          <!-- SECURITY ACCESS LAYER OVERLAY -->
+          <div class="lock-overlay" id="secOverlay">
+            <button class="lock-btn" onclick="decryptData()">
+              DECRYPT PRIVILEGED LOGS
+            </button>
+            <div class="lock-warning">
+              WARNING: UNMANAGED MEMETIC OR ADMINISTRATIVE SECURE PROTOCOLS
+              DETECTED. UNAUTHORIZED INTRUSION RECOGNIZED AS TREASON.
+            </div>
+          </div>
+
+          <div class="panel-body" id="restrictedData">
+            <p>
+              <strong>Medical & Psychological Digest:</strong> Sgt. Waldenstein
+              displays excellent stress tolerance scores. Psychological
+              screening profiles show high empathy markers balanced with strict
+              procedural discipline—an unusual combination that results in an
+              exceptionally humane yet firm command style. Shows no trace of
+              cognitive distortion or memetic residue from prior deployments.
+            </p>
+            <br />
+            <p>
+              <strong>Oncology & Respiratory History:</strong> Clinical records
+              indicate a severe history of chemical dependency, noting that the
+              subject was an aggressive chain-smoker for twenty (20) consecutive
+              years. This chronic exposure culminated in the diagnosis of
+              malignant squamous cell carcinoma in the right lung lobe. A highly
+              invasive surgical resection was performed by Foundation medical
+              staff. The procedure was fully successful, resulting in complete
+              tumor removal and clear margins. Due to the deployment of
+              low-level amnestic conditioning during recovery, the patient
+              experiences zero psychosomatic phantom pains, though residual
+              respiratory capacity is monitored closely during high-exertion
+              security drills.
+            </p>
+            <br />
+            <p>
+              <strong>Archival Metadata Index:</strong> Historical
+              cross-reference reveals a comprehensive profile scrub. Prior
+              identification index indicates operative was registered as
+              <span class="redacted"
+                >Level 4 Clearance Asset: Colonel Finn Grimes</span
+              >
+              stationed out of <span class="redacted">Site-61</span> and
+              <span class="redacted">UKR-Site-190</span>.
+            </p>
+            <br />
+            <p>
+              <strong
+                >Historical File Summary Excerpt (Site-61 Archive):</strong
+              >
+              Operative previously handled training paradigms for high-output
+              tactical detachments, managing volatile encounters involving
+              Class-C personnel and anomalous entities, including volatile
+              assets such as
+              <span class="redacted">[E-00] "The Justicar"</span>. Current
+              reassignment protocols to Site-65 under the 'Waldenstein' identity
+              require absolute silence regarding past security tier
+              authorizations.
+            </p>
+          </div>
+        </section>
+
+        <!-- LORE APPROVAL SECTION (FOR STAFF REVIEW) -->
+        <section
+          class="data-panel"
+          style="border: 1px dashed var(--warning-amber)"
+        >
+          <div class="panel-nav" style="background: rgba(245, 158, 11, 0.05)">
+            <h2 style="color: var(--warning-amber)">
+              IV. PENDING LORE APPROVAL // STAFF REVIEW ONLY
+            </h2>
+          </div>
+          <div class="panel-body">
+            <p>
+              <strong>Proposed Character Arc / Milestone Update:</strong> This
+              section dictates the transitionary narrative for Sgt.
+              Waldenstein's operational evolution within Site-65. Personnel are
+              awaiting Administrative Staff authorization to greenlight specific
+              upcoming character developments, specifically targeting his future
+              advancement track toward divisional leadership, training program
+              revisions, and his deep-rooted focus on rebuilding foundational
+              GSD accountability. <em>Status: Pending Staff Signature.</em>
+            </p>
+          </div>
+        </section>
+
+        <!-- BIOLOGICAL INCIDENT FILE -->
+        <section class="data-panel lore-panel">
+          <div class="panel-nav lore-nav">
+            <h2>V. Incident Report: Biological Contamination Event #65-992x</h2>
+            <button
+              class="lore-toggle-btn"
+              id="loreToggleBtn"
+              onclick="toggleLore()"
+            >
+              SHOW CLASSIFIED LORE [▼]
+            </button>
+          </div>
+          <div class="lore-content-wrapper" id="loreContentWrapper">
+            <div class="panel-body lore-body">
+              <div class="lore-warning-banner">
+                <strong
+                  >[WARNING: RESTRICTED LORE DATABASE ENTRY #65-992X]</strong
+                >
+                <p>
+                  The following file contains highly sensitive documentation
+                  regarding physical restructuring events. Proceed at your own
+                  discretion.
+                </p>
+              </div>
+              <div class="lore-details">
+                <h3>1. Preliminary Containment Breach Sequence</h3>
+                <p>
+                  At approximately 03:14 hours, containment of Sub-Subject E-902
+                  (a non-Euclidean, trans-dimensional biological entity) was
+                  compromised due to a cascade power failure in Sector-G. Sgt.
+                  Waldenstein, leading Security Response Team Lambda-4, arrived
+                  to establish a physical barrier lock. During the manual
+                  override procedure of the primary blast door, a micro-fracture
+                  in the containment cell's viewport ruptured, releasing a
+                  high-velocity spray of vaporized bio-organic slurry directly
+                  into the anteroom.
+                </p>
+                <p>
+                  Due to automated lockdown protocols, the security doors
+                  sealed, isolating Sgt. Waldenstein inside the contaminated
+                  containment anteroom with the active anomaly.
+                </p>
+
+                <h3>2. Physical Transformation Logs (Mitotic Progression)</h3>
+                <p>
+                  The biological slurry acted as a hyper-accelerated mutagenic
+                  vector. Analysis of subsequent audio logs and internal
+                  security feeds captured the following physical alterations
+                  over the 14-hour lockout period:
+                </p>
+                <ul>
+                  <li>
+                    <strong>T+02h 15m:</strong> Subject reported severe neural
+                    hyper-sensitisation and migratory bone aches. Sub-dermal
+                    scanning later revealed localized osteo-remodelling
+                    beginning at the base of the coccyx.
+                  </li>
+                  <li>
+                    <strong>T+05h 40m:</strong> Structural elongation of the
+                    lower lumbar vertebrae became pronounced. The dermal layer
+                    split as a secondary spinal column emerged, rapidly
+                    developing muscular tissue and thick, white-tipped vulpine
+                    fur. This caudal appendage (tail) reached a length of
+                    approximately 65 centimeters.
+                  </li>
+                  <li>
+                    <strong>T+08h 12m:</strong> Cranial restructuring commenced.
+                    The subject experienced severe internal cranial fractures as
+                    the human auditory canal and external ears atrophied. The
+                    cartilage of the original ears collapsed into necrotic
+                    tissue.
+                  </li>
+                  <li>
+                    <strong>T+11h 30m:</strong> Two predatory, fur-lined aural
+                    structures began developing at the coronal suture, tearing
+                    through the scalp tissue. These ears became fully mobile and
+                    responsive to high-frequency audio stimulation.
+                  </li>
+                  <li>
+                    <strong>T+14h 00m:</strong> The transformation concluded.
+                    Subject's core biological indicators stabilized. The
+                    mutation did not exhibit typical anomalous cellular
+                    instability; rather, the body naturally synthesized the new
+                    vulpine structures via accelerated, traumatic cellular
+                    mitosis.
+                  </li>
+                </ul>
+
+                <h3>3. Medical/Psychological Evaluation</h3>
+                <p>
+                  Despite the severe pain of the physical transformation, Sgt.
+                  Waldenstein retained full cognitive capacity and loyalty to
+                  the Foundation. Post-exposure testing confirms that the new
+                  appendages are fully integrated into the subject's nervous and
+                  skeletal systems. To prevent psychological trauma and phantom
+                  limb syndrome, a targeted Class-A amnestic sweep was
+                  administered to dampen the sensory memory of the
+                  transformation event itself. Sgt. Waldenstein was cleared for
+                  active duty under modified physical protocols, and Site-65
+                  staff have been instructed to ignore these structural
+                  variations in standard security operations.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- TERMINAL INTERFACE FOOTER -->
+    <footer>
+      <div>SITE-65 INTERNAL PERSONNEL RECORD SYSTEM // SECURITY OVERWATCH</div>
+      <div>SECURE // CONTAIN // PROTECT</div>
+    </footer>
+    <!-- INTERACTIVE SCRIPTS -->
+    <script src="lucas.js" defer></script>
+  </body>
+</html>
